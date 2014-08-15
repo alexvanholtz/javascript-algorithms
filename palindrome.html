@@ -24,23 +24,38 @@ function isPalindrome2(word){
   }
 }
 
+function isPalindrome3(word){
+  var word_lower = word.toLowerCase(),
+      word_len = word_lower.length,
+      reversed_word = [];
+
+  for(var i = 0; i < word_len; i++){
+    reversed_word.unshift(word_lower[i]);
+  }      
+
+  if(word_lower === reversed_word.join("")){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 var word = prompt("Enter a word");
+// var word = "tacocat";
 
-var p = performance.now();
+// var p = performance.now();
 
-if(isPalindrome(word)){
-  document.write("Method 1: " + word + " is a palindrome<br/>");
+if(word != null){
+  if(isPalindrome3(word)){
+    document.write(word + " is a palindrome<br/>");
+  }else{
+    document.write(word + " is not a palindrome<br/>");
+  }
 }else{
-  document.write("Method 1: " + word + " is not a palindrome<br/>");
+  document.write("you did not supply a word");
 }
 
-if(isPalindrome2(word)){
-  document.write("Method 2: " + word + " is a palindrome<br/>");
-}else{
-  document.write("Method 2: " + word + " is not a palindrome<br/>");
-}
-
-console.log(performance.now()-p);
+// console.log(performance.now()-p);
 
 </script>
 
