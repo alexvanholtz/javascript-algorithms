@@ -1,11 +1,12 @@
 <script>
 
 function isPalindrome(word){
-  var word_len = word.length,
+  var word_lower = word.toLowerCase()
+      word_len = word_lower.length,
       word_len_half = word_len / 2;
 
   for(var i = 0, j = word_len - 1; i < word_len_half ; i++, j--){
-    if(word.charAt(i) != word.charAt(j)){
+    if(word_lower.charAt(i) != word_lower.charAt(j)){
       return false;
     }
   }
@@ -13,21 +14,30 @@ function isPalindrome(word){
 }
 
 function isPalindrome2(word){
-  var reversed_word = word.split('').reverse().join('');
-  if(word === reversed_word){
+  var word_lower = word.toLowerCase(),
+      reversed_word = word.split('').reverse().join('');
+
+  if(word_lower === reversed_word){
     return true;
   }else{
     return false;
   }
 }
 
-var p = performance.now(),
-    tacocat = "tacocats";
+var word = prompt("Enter a word");
 
-if(isPalindrome(tacocat)){
-  document.write("this is a palindrome");
+var p = performance.now();
+
+if(isPalindrome(word)){
+  document.write("Method 1: " + word + " is a palindrome<br/>");
 }else{
-  document.write("this is not a palindrome");
+  document.write("Method 1: " + word + " is not a palindrome<br/>");
+}
+
+if(isPalindrome2(word)){
+  document.write("Method 2: " + word + " is a palindrome<br/>");
+}else{
+  document.write("Method 2: " + word + " is not a palindrome<br/>");
 }
 
 console.log(performance.now()-p);
