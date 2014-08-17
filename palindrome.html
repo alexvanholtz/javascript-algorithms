@@ -1,61 +1,68 @@
 <script>
 
-function isPalindrome(word){
-  var word_lower = word.toLowerCase()
-      word_len = word_lower.length,
-      word_len_half = word_len / 2;
+function PalindromeChecker(word){
 
-  for(var i = 0, j = word_len - 1; i < word_len_half ; i++, j--){
-    if(word_lower.charAt(i) != word_lower.charAt(j)){
-      return false;
+  this.word = word.toLowerCase();
+  this.word_len = this.word.length;
+
+  this.isPalindrome1 = function(){
+    var word_len_half = this.word_len / 2;
+
+    for(var i = 0, j = this.word_len - 1; i < word_len_half ; i++, j--){
+      if(this.word.charAt(i) != this.word.charAt(j)){
+        this.printResult(false);
+        return;
+      }
     }
+    
+    this.printResult(true);
+
   }
-  return true;
+
+  this.isPalindrome2 = function(){
+    var reversed_word = word.split('').reverse().join('');
+
+    if(this.word === reversed_word){
+      this.printResult(true);
+    }else{
+      this.printResult(false);
+    }
+
+  }
+
+  this.isPalindrome3 = function(){
+    var reversed_word = [];
+
+    for(var i = 0; i < this.word_len; i++){
+      reversed_word.unshift(this.word[i]);
+    }      
+
+    if(this.word === reversed_word.join("")){
+      this.printResult(true);
+    }else{
+      this.printResult(false);
+    }
+
+  }
+
+  this.printResult = function(isTrue){
+
+    if(isTrue){
+      document.write(word + " is a palindrome<br/>");
+    }else{
+      document.write(word + " is not a palindrome<br/>");
+    }
+
+  }
+
 }
 
-function isPalindrome2(word){
-  var word_lower = word.toLowerCase(),
-      reversed_word = word.split('').reverse().join('');
+var palindromeChecker = new PalindromeChecker("tacocat tacocat");
 
-  if(word_lower === reversed_word){
-    return true;
-  }else{
-    return false;
-  }
-}
+palindromeChecker.isPalindrome1();
+palindromeChecker.isPalindrome2();
+palindromeChecker.isPalindrome3();
 
-function isPalindrome3(word){
-  var word_lower = word.toLowerCase(),
-      word_len = word_lower.length,
-      reversed_word = [];
-
-  for(var i = 0; i < word_len; i++){
-    reversed_word.unshift(word_lower[i]);
-  }      
-
-  if(word_lower === reversed_word.join("")){
-    return true;
-  }else{
-    return false;
-  }
-}
-
-var word = prompt("Enter a word");
-// var word = "tacocat";
-
-// var p = performance.now();
-
-if(word != null){
-  if(isPalindrome3(word)){
-    document.write(word + " is a palindrome<br/>");
-  }else{
-    document.write(word + " is not a palindrome<br/>");
-  }
-}else{
-  document.write("you did not supply a word");
-}
-
-// console.log(performance.now()-p);
 
 </script>
 
