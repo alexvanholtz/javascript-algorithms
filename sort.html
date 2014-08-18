@@ -1,0 +1,34 @@
+<script>
+
+
+function swap(arr, firstIndex, secondIndex){
+  var temp = arr[firstIndex];
+  arr[firstIndex] = arr[secondIndex];
+  arr[secondIndex] = temp;
+}
+
+function bubbleSort(arr){
+
+  var len = arr.length;
+
+  for (var i=0; i < len; i++){
+      for (var j=0, stop=len-i; j < stop; j++){
+       
+          if (arr[j] > arr[j+1]){
+              swap(arr, j, j+1);
+          }
+      }
+  }
+
+  return arr;
+}
+
+
+var newArray = [2,5,3,4,2,1];
+
+document.write("Before: " + newArray + "<br>");
+document.write("After: " + bubbleSort(newArray) + "<br>");
+
+</script>
+
+
